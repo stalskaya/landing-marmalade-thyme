@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marmalade &amp; Thyme — Artisanal Café &amp; Bakery</title>
+<meta name="description" content="Marmalade &amp; Thyme is an artisanal café and bakery in Old Town. Freshly baked sourdough, butter croissants and all-day breakfast. Open from 8am, Mon–Sun.">
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://marmaladeandthyme.com/"><!-- TODO: замени на финальный URL -->
+<meta property="og:title"       content="Marmalade &amp; Thyme — Artisanal Café &amp; Bakery">
+<meta property="og:description" content="Freshly baked sourdough, butter croissants and all-day breakfast in Old Town. Open from 8am every day.">
+<!-- TODO: создай og-image 1200×630px и замени путь ниже -->
+<meta property="og:image"       content="https://marmaladeandthyme.com/og-image.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Marmalade &amp; Thyme — Artisanal Café &amp; Bakery">
+<meta name="twitter:description" content="Freshly baked sourdough, butter croissants and all-day breakfast in Old Town. Open from 8am every day.">
+<meta name="twitter:image"       content="https://marmaladeandthyme.com/og-image.jpg"><!-- TODO: тот же файл что og:image -->
+
+<!-- Favicon — TODO: замени /favicon.ico на свой файл -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<!-- TODO: создай apple-touch-icon.png 180×180px и замени путь ниже -->
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<!-- GA4 — TODO: вставь свой Measurement ID -->
+<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXXXXX');</script> -->
+
+<!-- Meta Pixel — TODO: вставь свой Pixel ID -->
+<!-- <script>!function(f,b,e,v,n,t,s){...}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','YOUR_PIXEL_ID');fbq('track','PageView');</script> -->
+
+<link rel="preconnect" href="https://res.cloudinary.com" crossorigin>
+<link rel="preload" as="image" href="https://res.cloudinary.com/drgt7nf4u/image/upload/q_auto,f_auto,w_1600/v1781429845/v-placeholder-2_juiaee.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sage:#ECEDE0;        /* page background — pale thyme */
+    --paper:#F4F4EA;       /* cards / light panels */
+    --ink:#20271A;         /* near-black green */
+    --pine:#44552F;        /* primary accent — deep thyme green */
+    --honey:#B8862B;       /* secondary accent — honey gold */
+    --espresso:#28200F;    /* dark band */
+    --milk:#F1EFE0;        /* light text on dark */
+    --display:'Fraunces', Georgia, serif;
+    --body:'Hanken Grotesk', Helvetica, Arial, sans-serif;
+    --ease:cubic-bezier(.22,.61,.36,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sage);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img,video{display:block;width:100%;height:100%;object-fit:cover;}
+  /* placeholder background — shows if external images are blocked */
+  .hero-bg,.split-photo,.card-photo,.ph-a,.ph-b,.insta-grid a{
+    background:
+      radial-gradient(circle at 30% 30%, rgba(184,134,43,.18), transparent 55%),
+      repeating-linear-gradient(45deg,#E3E4D5 0 16px,#EAEBDD 16px 32px);
+  }
+  a{color:inherit;text-decoration:none;}
+  .caps{
+    font-family:var(--body);
+    font-weight:600;
+    font-size:11px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- scroll animations ---------- */
+  [data-reveal]{
+    opacity:0;transform:translateY(30px);
+    transition:opacity .9s var(--ease), transform .9s var(--ease);
+    transition-delay:var(--d,0s);
+  }
+  [data-reveal].in{opacity:1;transform:none;}
+  .mask{
+    /* clip-path:inset(0 0 100% 0); */
+    transition:clip-path 1.15s cubic-bezier(.65,.05,.36,1);
+    transition-delay:var(--d,0s);
+  }
+  .mask.in{clip-path:inset(0 0 0% 0);}
+  .mask > img{
+    transform:scale(1.12);
+    transition:transform 1.5s var(--ease);
+    transition-delay:var(--d,0s);
+  }
+  .mask.in > img{transform:scale(1);}
+
+  /* ---------- header ---------- */
+  header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(20px,4vw,56px);
+    border-bottom:1px solid rgba(32,39,26,.16);
+    position:sticky;top:0;background:var(--sage);z-index:50;
+  }
+  .logo{
+    font-family:var(--display);
+    font-weight:560;font-size:15px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-variation-settings:'opsz' 144;
+    line-height:1.1;
+    white-space:nowrap;
+  }
+  .logo span{color:var(--honey);}
+  nav{
+    display:flex;gap:clamp(16px,2.5vw,34px);
+    position:absolute;left:50%;transform:translateX(-50%);
+  }
+  nav a{position:relative;padding:4px 0;}
+  nav a::after{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;
+    background:var(--pine);transition:width .3s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .btn-pill{
+    border:1.5px solid var(--ink);
+    border-radius:999px;
+    padding:10px 22px;
+    white-space:nowrap;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    transition:color .3s ease, transform .2s ease, box-shadow .2s ease;
+    z-index:0;
+  }
+  .btn-pill::before{
+    content:'';position:absolute;inset:0;
+    background:var(--ink);
+    border-radius:999px;
+    transform:translateX(-101%);
+    transition:transform .4s cubic-bezier(.22,.61,.36,1);
+    z-index:-1;
+  }
+  .btn-pill:hover::before{transform:translateX(0);}
+  .btn-pill:hover{color:var(--milk);}
+
+  .btn-ghost{
+    display:inline-block;
+    border:1.5px solid var(--milk);
+    border-radius:999px;
+    padding:12px 28px;
+    font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    position:relative;overflow:hidden;cursor:pointer;
+    transition:color .3s ease, transform .2s ease;
+    z-index:0;
+  }
+  .btn-ghost::before{
+    content:'';position:absolute;inset:0;
+    background:var(--milk);
+    border-radius:999px;
+    transform:translateX(-101%);
+    transition:transform .4s cubic-bezier(.22,.61,.36,1);
+    z-index:-1;
+  }
+  .btn-ghost:hover::before{transform:translateX(0);}
+  .btn-ghost:hover{color:var(--pine);}
+  .nav-toggle{display:none;}
+
+  /* ---------- mobile staggered menu ---------- */
+  .mob-menu-btn{
+    display:none;
+    background:none;border:none;cursor:pointer;
+    padding:8px;
+    flex-direction:column;justify-content:center;align-items:center;
+    gap:5px;z-index:102;position:relative;
+  }
+  .mob-menu-btn .bar{
+    display:block;width:22px;height:2px;
+    background:var(--ink);border-radius:2px;
+    transition:transform .4s cubic-bezier(.22,.61,.36,1), opacity .3s ease, width .3s ease;
+    transform-origin:center;
+  }
+  .mob-menu-open .mob-menu-btn .bar:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .mob-menu-open .mob-menu-btn .bar:nth-child(2){opacity:0;transform:scaleX(0);}
+  .mob-menu-open .mob-menu-btn .bar:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* prelayers — staggered underlay */
+  .mob-prelayers{
+    position:fixed;inset:0;z-index:98;
+    pointer-events:none;
+  }
+  .mob-prelayer{
+    position:absolute;inset:0;
+    transform:translateX(100%);
+    transition:transform .45s cubic-bezier(.77,0,.18,1);
+  }
+  .mob-prelayer:nth-child(1){background:var(--honey);transition-delay:.04s;}
+  .mob-prelayer:nth-child(2){background:var(--pine);transition-delay:.0s;}
+  .mob-menu-open .mob-prelayer{transform:translateX(0);}
+
+  /* main panel */
+  .mob-panel{
+    position:fixed;inset:0;z-index:99;
+    background:var(--espresso);
+    transform:translateX(100%);
+    transition:transform .48s cubic-bezier(.77,0,.18,1);
+    transition-delay:.08s;
+    display:flex;flex-direction:column;
+    padding:100px 32px 48px;
+    overflow-y:auto;
+    pointer-events:none;
+  }
+  .mob-menu-open .mob-panel{
+    transform:translateX(0);
+    pointer-events:all;
+  }
+
+  /* nav items inside panel */
+  .mob-panel nav{
+    display:flex;flex-direction:column;
+    gap:0;position:static;
+    transform:none;left:auto;
+    width:100%;
+  }
+  .mob-panel nav a{
+    font-family:var(--display);
+    font-weight:560;
+    font-size:clamp(42px,12vw,68px);
+    line-height:1.05;
+    text-transform:uppercase;
+    letter-spacing:-.02em;
+    color:var(--milk);
+    padding:12px 0;
+    border-bottom:1px solid rgba(241,239,224,.1);
+    overflow:hidden;
+    display:block;
+    position:relative;
+    transition:color .25s ease;
+  }
+  .mob-panel nav a::after{display:none;}
+  .mob-panel nav a:hover{color:var(--honey);}
+
+  /* item entrance — slide up */
+  .mob-panel nav a span{
+    display:block;
+    transform:translateY(110%);
+    transition:transform .6s cubic-bezier(.22,.61,.36,1);
+  }
+  .mob-menu-open .mob-panel nav a:nth-child(1) span{transform:translateY(0);transition-delay:.22s;}
+  .mob-menu-open .mob-panel nav a:nth-child(2) span{transform:translateY(0);transition-delay:.30s;}
+  .mob-menu-open .mob-panel nav a:nth-child(3) span{transform:translateY(0);transition-delay:.38s;}
+
+  /* close button */
+  .mob-close{
+    position:absolute;top:24px;right:24px;
+    background:none;border:none;cursor:pointer;
+    font-size:20px;line-height:1;
+    color:rgba(241,239,224,.5);
+    transition:color .2s ease;
+    padding:8px;
+    z-index:2;
+  }
+  .mob-close:hover{color:var(--milk);}
+
+  /* two buttons side by side */
+  .mob-panel .mob-book{
+    margin-top:40px;
+    opacity:0;transform:translateY(16px);
+    transition:opacity .4s ease .5s, transform .4s cubic-bezier(.22,.61,.36,1) .5s;
+    display:flex;gap:12px;flex-wrap:wrap;
+  }
+  .mob-menu-open .mob-panel .mob-book{opacity:1;transform:translateY(0);}
+  .mob-panel .mob-book a{
+    display:inline-block;
+    border:1.5px solid rgba(241,239,224,.5);
+    border-radius:999px;
+    padding:13px 24px;
+    font-family:var(--body);
+    font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--milk);
+    transition:background .25s ease, color .25s ease, border-color .25s ease;
+  }
+  .mob-panel .mob-book a:hover{
+    background:var(--milk);
+    color:var(--espresso);
+    border-color:var(--milk);
+  }
+
+  /* socials in panel */
+  .mob-socials{
+    margin-top:auto;padding-top:24px;
+    opacity:0;transform:translateY(12px);
+    transition:opacity .4s ease .55s, transform .4s ease .55s;
+    display:flex;gap:24px;flex-wrap:wrap;
+  }
+  .mob-menu-open .mob-socials{opacity:1;transform:translateY(0);}
+  .mob-socials a{
+    font-size:12px;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;color:rgba(241,239,224,.55);
+    transition:color .2s ease;
+  }
+  .mob-socials a:hover{color:var(--milk);}
+
+
+
+  /* ---------- section 1: hero (photo/video background) ---------- */
+  .hero{
+    position:sticky;top:0;
+    height:100svh;
+    min-height:560px;
+    display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    text-align:center;
+    overflow:hidden;
+    color:var(--milk);
+    padding:0 20px;
+    z-index:0;
+  }
+  /* все блоки после hero едут поверх видео */
+  .hero ~ *{
+    position:relative;
+    z-index:1;
+  }
+  /* секции с собственным фоном — не перебиваем */
+  .rail,.menu-trio,.meet,.insta,.visit-section{background:var(--sage);}
+  .split-panel{background:var(--pine);}
+  .bakery-band{background:var(--espresso);}
+  .meet{background:var(--paper);}
+  footer{background:var(--ink);}
+  /* card background handled in main card CSS */
+  /* rail — без fade-in */
+  .rail{border-radius:48px 48px 0 0;}
+  .hero-bg{position:absolute;inset:0;z-index:0;}
+  .hero-poster{
+    position:absolute;inset:0;
+    opacity:1;
+    transition:opacity .8s ease;
+    pointer-events:none;
+  }
+  .hero-poster.hide{opacity:0;}
+  /* darkening shade so the text stays readable on the video */
+  .hero::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:
+    linear-gradient(180deg, rgba(32,39,26,.72) 0%, rgba(32,39,26,.35) 45%, rgba(40,32,15,.40) 100%),
+    rgba(32,39,26,.08);
+  }
+  .hero-content{position:relative;z-index:2;max-width:980px;}
+  .hero .caps{color:var(--honey);display:block;margin-bottom:24px;text-shadow:0 1px 12px rgba(32,39,26,.4);}
+  .hero h1{
+    font-family:var(--display);
+    font-weight:560;
+    font-variation-settings:'opsz' 144;
+    font-size:clamp(40px,7.5vw,104px);
+    line-height:.96;
+    letter-spacing:-.015em;
+    text-transform:uppercase;
+    text-shadow:0 2px 30px rgba(32,39,26,.35);
+  }
+  .hero p{
+    margin:24px auto 0;max-width:460px;
+    font-size:14px;color:rgba(241,239,224,.85);
+  }
+  .hero .btn-ghost{margin-top:32px;}
+
+  /* rotating stamp — signature element */
+  .stamp{
+    position:absolute;right:24px;bottom:24px;
+    width:80px;height:80px;z-index:3;
+    animation:spin 22s linear infinite;
+    filter:drop-shadow(0 10px 24px rgba(32,39,26,.35));
+  }
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion: reduce){
+    .stamp{animation:none;}
+    *{transition:none!important;}
+    [data-reveal],.mask{opacity:1;transform:none;clip-path:none;}
+    .mask > img{transform:none;}
+  }
+
+  /* ---------- info rail ---------- */
+  .rail{
+    display:flex;justify-content:center;align-items:center;
+    gap:clamp(14px,3vw,34px);flex-wrap:wrap;
+    border-bottom:1px solid rgba(32,39,26,.2);
+    padding:16px clamp(16px,3vw,40px);
+    overflow:hidden;
+  }
+  .rail .caps{color:var(--pine);}
+  .rail .dot{color:var(--honey);font-size:13px;}
+
+  /* marquee — скрыт на десктопе */
+  .rail-marquee{display:none;}
+
+  @media (max-width:980px){
+    .rail{
+      padding:14px 0;
+      gap:0;flex-wrap:nowrap;
+      justify-content:flex-start;
+    }
+    .rail-item{display:none;}
+    .rail-marquee{
+      display:block;
+      overflow:hidden;
+      width:100%;
+    }
+    .rail-track{
+      display:flex;align-items:center;
+      gap:clamp(12px,3vw,24px);
+      white-space:nowrap;
+      animation:rail-scroll 18s linear infinite;
+      width:max-content;
+    }
+    .rail-track .caps{color:var(--pine);}
+    .rail-track .dot{color:var(--honey);font-size:13px;flex-shrink:0;}
+    @keyframes rail-scroll{
+      from{transform:translateX(0);}
+      to{transform:translateX(-50%);}
+    }
+    @media (prefers-reduced-motion:reduce){
+      .rail-track{animation:none;}
+    }
+  }
+
+  /* ---------- section 2: split block ---------- */
+  .split{display:grid;grid-template-columns:1.15fr 1fr;min-height:600px;}
+  .split-photo{overflow:hidden;}
+  .split-panel{
+    background:var(--pine);
+    color:var(--milk);
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:clamp(48px,7vw,110px);
+  }
+  .split-panel .caps{color:var(--honey);margin-bottom:26px;}
+  .split-panel h2{
+    font-family:var(--display);
+    font-weight:540;
+    font-size:clamp(36px,4.4vw,62px);
+    line-height:1.05;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .split-panel p{max-width:420px;font-size:15px;color:rgba(241,239,224,.82);margin-bottom:38px;}
+  .btn-ghost{
+    display:inline-block;
+    border:1.5px solid var(--milk);
+    border-radius:999px;
+    padding:12px 28px;
+    font-weight:600;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    transition:all .25s ease;
+  }
+  .btn-ghost:hover{background:var(--milk);color:var(--pine);}
+
+  /* ---------- section 3: menu trio ---------- */
+  .menu-trio{padding:clamp(80px,12vh,140px) clamp(20px,4vw,56px);}
+  .section-head{max-width:720px;margin-bottom:clamp(40px,6vh,70px);}
+  .section-head .caps{color:var(--honey);display:block;margin-bottom:16px;}
+  .section-head h2{
+    font-family:var(--display);font-weight:540;
+    font-size:clamp(34px,4.4vw,58px);line-height:1.06;
+  }
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.5vw,36px);}
+  .card{
+    border-radius:16px;overflow:hidden;
+    position:relative;
+    aspect-ratio:3/4;
+    cursor:pointer;
+  }
+  .card[data-reveal]{transition:opacity .9s var(--ease), transform .9s var(--ease);}
+  .card.in:hover{transform:translateY(-6px);}
+
+  /* фото на всю карточку */
+  .card-photo{
+    position:absolute;inset:0;
+    overflow:hidden;
+  }
+  .card-photo img{
+    width:100%;height:100%;object-fit:cover;
+    transition:transform .9s var(--ease);
+  }
+  .card:hover .card-photo img{transform:scale(1.06);}
+
+  /* постоянный градиент снизу */
+  .card::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(
+      to bottom,
+      rgba(32,39,26,0)    0%,
+      rgba(32,39,26,.08)  35%,
+      rgba(32,39,26,.65)  65%,
+      rgba(32,39,26,.90) 100%
+    );
+    pointer-events:none;
+    z-index:1;
+  }
+
+  /* обёртка для всего текста */
+  .card-body{
+    position:absolute;inset:0;
+    z-index:2;
+    pointer-events:none;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+  }
+
+  /* дефолтный текст — внизу */
+  /* card-default скрываем — теперь всё внутри card-panel */
+  .card-default{ display:none; }
+
+  /* плашка — по умолчанию full-width без отступов */
+  .card-panel{
+    position:absolute;
+    left:0;right:0;bottom:-16px;
+    border-radius:0 0 14px 14px;
+    padding:48px 22px 32px;
+    background:transparent;
+    border:1px solid transparent;
+    backdrop-filter:none;
+    -webkit-backdrop-filter:none;
+    transition:
+      background .4s ease,
+      border-color .4s ease,
+      box-shadow .4s ease,
+      border-radius .4s ease,
+      padding-top .45s cubic-bezier(.22,.61,.36,1),
+      bottom .45s cubic-bezier(.22,.61,.36,1),
+      margin .45s cubic-bezier(.22,.61,.36,1);
+    overflow:hidden;
+    margin:0;
+  }
+  .card:hover .card-panel{
+    bottom:16px;
+    margin:0 16px;
+    border-radius:14px;
+    background:rgba(32,39,26,.55);
+    border-color:rgba(241,239,224,.12);
+    backdrop-filter:blur(20px) saturate(1.5);
+    -webkit-backdrop-filter:blur(20px) saturate(1.5);
+    box-shadow:0 8px 32px rgba(32,39,26,.22);
+    padding-top:18px;
+  }
+
+  /* caps — всегда видна */
+  .card-panel .caps{
+    color:var(--honey);font-size:10px;letter-spacing:.22em;
+    display:block;margin-bottom:8px;
+    text-shadow:0 1px 6px rgba(32,39,26,.9), 0 2px 24px rgba(32,39,26,.7);
+  }
+
+  /* тайтл — крупный по умолчанию, мельче на hover */
+  .card-panel h3{
+    font-family:var(--display);font-weight:560;
+    font-size:clamp(26px,2.6vw,34px);
+    color:var(--milk);line-height:1.05;
+    margin-bottom:0;
+    text-shadow:0 2px 10px rgba(32,39,26,.7), 0 4px 36px rgba(32,39,26,.5);
+    transition:
+      font-size .5s cubic-bezier(.22,.61,.36,1),
+      margin-bottom .5s cubic-bezier(.22,.61,.36,1);
+    will-change:font-size;
+  }
+  .card:hover .card-panel h3{
+    font-size:clamp(20px,2vw,24px);
+    margin-bottom:12px;
+  }
+
+  /* параграф — скрыт, появляется на hover */
+  .card-panel p{
+    font-size:13px;color:rgba(241,239,224,.82);
+    line-height:1.55;
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    margin-bottom:0;
+    transition:
+      max-height .55s cubic-bezier(.22,.61,.36,1),
+      opacity .4s ease .1s,
+      margin-bottom .5s ease;
+  }
+  .card:hover .card-panel p{
+    max-height:120px;
+    opacity:1;
+    margin-bottom:14px;
+  }
+
+  /* link-line — скрыта, появляется на hover */
+  .card-panel .link-line{
+    display:inline-block;
+    font-weight:700;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--milk);
+    border-bottom:1.5px solid var(--honey);
+    padding-bottom:3px;
+    opacity:0;
+    transform:translateY(6px);
+    transition:opacity .35s ease .2s, transform .4s cubic-bezier(.22,.61,.36,1) .2s, color .2s ease;
+    pointer-events:none;
+  }
+  .card:hover .card-panel .link-line{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:all;
+  }
+  .card-panel .link-line:hover{color:var(--honey);}
+
+
+
+  /* ---------- section 4: about (café + bakery merged) ---------- */
+  .meet{
+    display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,5vw,80px);
+    align-items:center;
+    padding:clamp(80px,12vh,140px) clamp(20px,4vw,56px);
+    background:var(--paper);
+  }
+  .meet-copy .caps{color:var(--honey);display:block;margin-bottom:18px;}
+  .meet-copy h2{
+    font-family:var(--display);font-weight:540;
+    font-size:clamp(34px,4.2vw,56px);line-height:1.08;margin-bottom:20px;
+  }
+  .meet-copy p{max-width:480px;font-size:15px;color:rgba(32,39,26,.75);margin-bottom:30px;}
+  .mini-stats{
+    display:flex;gap:clamp(22px,3.5vw,48px);flex-wrap:wrap;
+    margin-bottom:36px;
+    padding-top:26px;
+    border-top:1px dashed rgba(32,39,26,.25);
+    max-width:480px;
+  }
+  .mini-stats .num{font-family:var(--display);font-size:clamp(26px,2.6vw,34px);font-weight:560;line-height:1.1;}
+  .mini-stats .label{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(32,39,26,.55);margin-top:4px;}
+  .meet-photos{position:relative;height:clamp(380px,52vw,560px);}
+  /* meet-photos: начальные разъехавшиеся позиции для scroll-эффекта */
+  .meet-photos .ph-a{
+    position:absolute;left:0;top:0;width:62%;height:84%;
+    border:6px solid var(--paper);
+    overflow:hidden;border-radius:16px;
+    will-change:transform;
+  }
+  .meet-photos .ph-b{
+    position:absolute;right:0;bottom:0;width:52%;height:62%;
+    border:6px solid var(--paper);
+    overflow:hidden;border-radius:16px;
+    will-change:transform;
+  }
+
+  /* кликабельная карточка */
+  .card[data-popup]{cursor:pointer;}
+  .card[data-popup] .link-line{pointer-events:none;}
+
+
+  /* ---------- section 5: instagram ---------- */
+  .insta{padding:clamp(80px,12vh,140px) 0 0;}
+  .insta .section-head{padding:0 clamp(20px,4vw,56px);}
+  .insta-grid{display:grid;grid-template-columns:repeat(6,1fr);}
+  .insta-grid a{aspect-ratio:1/1;overflow:hidden;position:relative;display:block;}
+  .insta-grid img{transition:transform .7s var(--ease);}
+  .insta-grid a:hover img{transform:scale(1.08);}
+  .insta-grid a::after{
+    content:"@marmaladeandthyme";
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(32,39,26,.6);color:var(--milk);
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+    opacity:0;transition:opacity .35s ease;
+  }
+  .insta-grid a:hover::after{opacity:1;}
+
+  /* ---------- footer (with visit info) ---------- */
+  footer{background:var(--ink);color:var(--milk);padding:clamp(64px,9vh,100px) clamp(20px,4vw,56px) 32px;}
+  .visit{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:clamp(28px,4vw,60px);
+    padding-bottom:clamp(56px,8vh,84px);
+    margin-bottom:clamp(56px,8vh,84px);
+    border-bottom:1px solid rgba(241,239,224,.18);
+  }
+  .visit h3{
+    font-family:var(--display);font-weight:560;font-size:24px;margin-bottom:18px;
+  }
+  .visit p, .visit li{font-size:14.5px;color:rgba(241,239,224,.75);}
+  .visit ul{list-style:none;}
+  .visit li{display:flex;justify-content:space-between;gap:20px;padding:7px 0;border-bottom:1px dashed rgba(241,239,224,.22);}
+  .visit a{border-bottom:1px solid var(--honey);}
+  .visit a:hover{color:var(--milk);}
+  .foot-mark{
+    font-family:var(--display);font-weight:560;text-transform:uppercase;
+    font-size:clamp(34px,5.5vw,65px);line-height:.95;letter-spacing:-.01em;
+    text-align:center;margin-bottom:clamp(44px,7vh,70px);
+  }
+  .foot-mark span{color:var(--honey);}
+  .foot-bottom{
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;
+    border-top:1px solid rgba(241,239,224,.18);padding-top:24px;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(241,239,224,.6);
+  }
+  .foot-bottom .socials{display:flex;gap:22px;}
+  .foot-bottom a:hover{color:var(--milk);}
+
+  /* ---------- split text animation ---------- */
+  .split-text{
+    overflow:visible;
+    display:block;
+  }
+  .split-word{
+    display:inline-block;
+    overflow:hidden;
+    vertical-align:bottom;
+    margin-right:.28em;
+    padding-bottom:.08em; /* чтобы нижние выносные не обрезались */
+  }
+  .split-word-inner{
+    display:inline-block;
+    transform:translateY(130%) rotate(2deg);
+    opacity:0;
+    transition:
+      transform 1s cubic-bezier(.16,1,.3,1),
+      opacity .7s cubic-bezier(.16,1,.3,1);
+    transition-delay:var(--wd, 0s);
+    will-change:transform,opacity;
+  }
+  .split-text.in .split-word-inner,
+  .in .split-text .split-word-inner{
+    transform:translateY(0) rotate(0deg);
+    opacity:1;
+  }
+
+
+  .form-row{margin-bottom:18px;position:relative;}
+  .form-row .field-error{
+    display:none;
+    font-size:10.5px;font-weight:600;
+    color:#8B2A1A;letter-spacing:.06em;
+    margin-top:5px;
+  }
+  .form-row.has-error input,
+  .form-row.has-error select,
+  .form-row.has-error textarea{border-color:#8B2A1A;}
+  .form-row.has-error .field-error{display:block;}
+  .form-row.has-error label{color:#8B2A1A;}
+  .form-row label{
+    display:block;
+    font-family:var(--body);font-size:10px;font-weight:700;
+    letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(32,39,26,.55);margin-bottom:7px;
+  }
+  .form-row input,
+  .form-row select,
+  .form-row textarea{
+    width:100%;
+    background:var(--sage);
+    border:1px solid rgba(32,39,26,.2);
+    border-radius:0;
+    padding:12px 14px;
+    font-family:var(--body);font-size:14px;color:var(--ink);
+    outline:none;
+    transition:border-color .2s ease;
+    appearance:none;-webkit-appearance:none;
+  }
+  .form-row input:focus,
+  .form-row select:focus,
+  .form-row textarea:focus{border-color:var(--pine);}
+  .form-row textarea{resize:vertical;min-height:110px;line-height:1.6;}
+  .form-row select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2344552F' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    padding-right:36px;cursor:pointer;
+  }
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;}
+  .btn-submit{
+    width:100%;margin-top:8px;
+    background:var(--pine);color:var(--milk);
+    border:none;cursor:pointer;
+    padding:15px 24px;
+    font-family:var(--body);font-size:11px;font-weight:700;
+    letter-spacing:.22em;text-transform:uppercase;
+    transition:background .25s ease;
+  }
+  .btn-submit:hover{background:var(--espresso);}
+  .form-confirm{
+    display:none;
+    text-align:center;
+    padding:clamp(32px,6vh,56px) 0 clamp(16px,3vh,28px);
+  }
+  .form-confirm.show{display:block;}
+  .form-fields.hide{display:none;}
+  .confirm-icon{
+    width:56px;height:56px;margin:0 auto 20px;
+    background:var(--pine);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .confirm-icon svg{width:26px;height:26px;}
+  .form-confirm h3{
+    font-family:var(--display);font-weight:560;
+    font-size:clamp(22px,4vw,30px);
+    text-transform:uppercase;color:var(--ink);
+    margin-bottom:12px;
+  }
+  .form-confirm p{font-size:14px;color:rgba(32,39,26,.65);line-height:1.6;max-width:320px;margin:0 auto;}
+
+
+  .popup-overlay{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(32,39,26,.55);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+    opacity:0;pointer-events:none;
+    transition:opacity .35s var(--ease);
+  }
+  .popup-overlay.open{opacity:1;pointer-events:all;}
+  .popup{
+    background:var(--paper);
+    width:100%;max-width:480px;
+    max-height:88vh;
+    overflow-y:auto;
+    padding:clamp(32px,5vw,56px);
+    position:relative;
+    transform:translateY(24px);
+    transition:transform .4s var(--ease);
+    /* hide scrollbar — all browsers */
+    scrollbar-width:none;        /* Firefox */
+    -ms-overflow-style:none;     /* IE / Edge */
+  }
+  .popup::-webkit-scrollbar{display:none;} /* Chrome / Safari */
+  .popup-overlay.open .popup{transform:none;}
+  .popup-close{
+    position:absolute;top:20px;right:20px;z-index:3;
+    background:none;border:none;cursor:pointer;
+    width:36px;height:36px;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink);opacity:.5;
+    font-size:22px;line-height:1;
+    transition:opacity .2s;
+  }
+  .popup-close:hover{opacity:1;}
+  .popup-label{
+    font-family:var(--body);font-weight:600;
+    font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+    color:var(--honey);display:block;margin-bottom:14px;
+  }
+  .popup-title{
+    font-family:var(--display);font-weight:560;
+    font-size:clamp(36px,7vw,56px);
+    text-transform:uppercase;
+    line-height:.92;letter-spacing:-.01em;
+    color:var(--ink);
+    margin-bottom:clamp(28px,4vh,44px);
+    font-variation-settings:'opsz' 144;
+  }
+  .popup-category{
+    margin-bottom:clamp(22px,3vh,34px);
+  }
+  .popup-category-head{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:14px;
+    padding-bottom:10px;
+    border-bottom:1.5px solid var(--ink);
+  }
+  .popup-category-name{
+    font-family:var(--body);font-weight:700;
+    font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--ink);
+  }
+  .popup-item{
+    display:grid;
+    grid-template-columns:28px 1fr auto;
+    gap:0 8px;
+    padding:10px 0;
+    align-items:start;
+  }
+  .popup-item + .popup-item{border-top:1px dashed rgba(32,39,26,.18);}
+  .popup-item-num{
+    font-family:var(--body);font-size:11px;font-weight:600;
+    color:rgba(32,39,26,.4);letter-spacing:.1em;
+    padding-top:2px;
+  }
+  .popup-item-name{
+    font-family:var(--body);font-size:15px;font-weight:600;
+    color:var(--ink);display:block;
+  }
+  .popup-item-desc{
+    font-size:12px;color:rgba(32,39,26,.55);
+    display:block;margin-top:3px;font-weight:400;
+  }
+  .popup-item-price{
+    font-family:var(--display);font-size:20px;font-weight:560;
+    color:var(--honey);
+    font-variation-settings:'opsz' 30;
+    padding-top:1px;
+  }
+  .popup-note{
+    margin-top:clamp(24px,3vh,36px);
+    padding-top:18px;
+    border-top:1px solid rgba(32,39,26,.16);
+    font-size:11.5px;color:rgba(32,39,26,.5);
+    line-height:1.6;
+  }
+
+
+  @media (max-width:980px){
+    .cards{grid-template-columns:1fr;}
+    .card{aspect-ratio:4/3;}
+    .split{grid-template-columns:1fr;}
+    .split-photo{height:380px;}
+    .meet{grid-template-columns:1fr;}
+    .insta-grid{grid-template-columns:repeat(3,1fr);}
+    .visit{grid-template-columns:1fr;}
+    .stamp{width:92px;height:92px;}
+    /* скрываем десктопную навигацию и Book a table из хедера */
+    nav{display:none;}
+    header .btn-pill{display:none;}
+    .nav-toggle{display:none;}
+    /* показываем гамбургер */
+    .mob-menu-btn{display:flex;}
+    /* фиксим отступ между секциями */
+    .menu-trio{padding:clamp(48px,8vw,80px) clamp(16px,4vw,32px);}
+    .meet{padding:clamp(48px,8vw,80px) clamp(16px,4vw,32px);}
+    .insta{padding:clamp(48px,8vw,80px) 0 0;}
+
+    /* карточки на мобиле: без ховера, текст внизу слева */
+    .card-panel{
+      left:0 !important;right:0 !important;
+      bottom:0 !important;
+      margin:0 !important;
+      padding:48px 20px 20px !important;
+      background:transparent !important;
+      border-color:transparent !important;
+      backdrop-filter:none !important;
+      -webkit-backdrop-filter:none !important;
+      box-shadow:none !important;
+      border-radius:0 0 14px 14px !important;
+      transition:none !important;
+    }
+    .card-panel h3{
+      font-size:clamp(24px,6vw,32px) !important;
+      margin-bottom:0 !important;
+      transition:none !important;
+    }
+    .card-panel p{display:none !important;}
+    .card-panel .link-line{
+      opacity:1 !important;transform:none !important;
+      transition:none !important;pointer-events:all !important;
+      margin-top:10px;display:inline-block !important;
+    }
+    .card:hover .card-panel{
+      left:0 !important;right:0 !important;bottom:0 !important;
+      margin:0 !important;padding-top:48px !important;
+      background:transparent !important;border-color:transparent !important;
+      backdrop-filter:none !important;-webkit-backdrop-filter:none !important;
+      box-shadow:none !important;
+    }
+    .card:hover .card-panel h3{font-size:clamp(24px,6vw,32px) !important;margin-bottom:0 !important;}
+    .card:hover .card-panel p{display:none !important;}
+    .card.in:hover{transform:none !important;}
+  }
+  @media (max-width:560px){
+    .insta-grid{grid-template-columns:repeat(2,1fr);}
+    .btn-pill{padding:9px 16px;font-size:10px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="#">Marmalade<br><span>&amp;</span> Thyme</a>
+  <nav id="nav">
+    <a class="caps" href="#menu">Menu</a>
+    <a class="caps" href="#about">About</a>
+    <a class="caps" href="#visit">Visit</a>
+  </nav>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <button class="mob-menu-btn" id="mobMenuBtn" aria-label="Open menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+    <a class="btn-pill caps" href="#" onclick="openPopup('popup-book');return false;">Book a table</a>
+  </div>
+</header>
+
+<!-- Mobile staggered menu -->
+<div class="mob-prelayers" aria-hidden="true">
+  <div class="mob-prelayer"></div>
+  <div class="mob-prelayer"></div>
+</div>
+<div class="mob-panel" id="mobPanel" aria-hidden="true">
+  <button class="mob-close" onclick="closeMobMenu()" aria-label="Close menu">&#x2715;</button>
+  <nav>
+    <a href="#menu"  onclick="closeMobMenu()"><span>Menu</span></a>
+    <a href="#about" onclick="closeMobMenu()"><span>About</span></a>
+    <a href="#visit" onclick="closeMobMenu()"><span>Visit</span></a>
+  </nav>
+  <div class="mob-book">
+    <a href="#" onclick="closeMobMenu();openPopup('popup-book');return false;">Book a table</a>
+    <a href="#" onclick="closeMobMenu();openPopup('popup-order');return false;">Order ahead</a>
+  </div>
+  <div class="mob-socials">
+    <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <a href="#" target="_blank" rel="noopener noreferrer">Tripadvisor</a>
+  </div>
+</div>
+
+<!-- SECTION 1: HERO — photo background now, swap to video later -->
+<section class="hero">
+  <div class="hero-bg">
+    <video autoplay muted loop playsinline preload="auto"
+      poster="https://res.cloudinary.com/drgt7nf4u/image/upload/q_auto,f_auto,w_1600/v1781429845/v-placeholder-2_juiaee.jpg">
+      <source src="https://res.cloudinary.com/drgt7nf4u/video/upload/q_auto:eco,vc_h264,w_1600/v1781292935/full-v_ihesdb.mp4" type="video/mp4">
+    </video>
+    <!-- poster layer: matches the video's first frame, fades out once playback begins -->
+    <img class="hero-poster" aria-hidden="true" alt=""
+      src="https://res.cloudinary.com/drgt7nf4u/image/upload/q_auto,f_auto,w_1600/v1781429845/v-placeholder-2_juiaee.jpg">
+  </div>
+  <div class="hero-content">
+    <span class="caps" data-reveal>Artisanal café &amp; bakery · est. 2021</span>
+    <h1 class="split-text hero-h1" data-split>Warm from the oven</h1>
+    <p data-reveal style="--d:.24s">Slow mornings, sourdough that takes its time, and marmalade made the old way. Breakfast served all day — the croissants go first.</p>
+    <a class="btn-ghost" href="#menu" data-reveal style="--d:.36s">See the menu</a>
+  </div>
+  <!-- rotating stamp: signature element -->
+  <svg class="stamp" viewBox="0 0 132 132" aria-hidden="true">
+    <defs>
+      <path id="circ" d="M 66,66 m -46,0 a 46,46 0 1,1 92,0 a 46,46 0 1,1 -92,0"/>
+    </defs>
+    <circle cx="66" cy="66" r="64" fill="#B8862B"/>
+    <circle cx="66" cy="66" r="56" fill="none" stroke="#28200F" stroke-width="1.5"/>
+    <text font-family="Hanken Grotesk, sans-serif" font-size="11.5" font-weight="700" letter-spacing="2.6" fill="#28200F">
+      <textPath href="#circ">FRESHLY BAKED • EVERY MORNING •</textPath>
+    </text>
+    <text x="66" y="74" text-anchor="middle" font-family="Fraunces, serif" font-size="26" font-weight="600" fill="#28200F">M&amp;T</text>
+  </svg>
+</section>
+
+<!-- INFO RAIL -->
+<div class="rail">
+  <!-- desktop: static items -->
+  <span class="caps rail-item">House bakery</span><span class="dot rail-item">✳</span>
+  <span class="caps rail-item">Breakfast all day</span><span class="dot rail-item">✳</span>
+  <span class="caps rail-item">Speciality coffee</span><span class="dot rail-item">✳</span>
+  <span class="caps rail-item">House marmalade</span>
+  <!-- mobile: marquee -->
+  <div class="rail-marquee" aria-hidden="true">
+    <div class="rail-track">
+      <span class="caps">House bakery</span><span class="dot">✳</span>
+      <span class="caps">Breakfast all day</span><span class="dot">✳</span>
+      <span class="caps">Speciality coffee</span><span class="dot">✳</span>
+      <span class="caps">House marmalade</span><span class="dot">✳</span>
+      <span class="caps">House bakery</span><span class="dot">✳</span>
+      <span class="caps">Breakfast all day</span><span class="dot">✳</span>
+      <span class="caps">Speciality coffee</span><span class="dot">✳</span>
+      <span class="caps">House marmalade</span><span class="dot">✳</span>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: SPLIT -->
+<section class="split" >
+  <div class="split-photo mask">
+    <img loading="lazy" class="plx" data-speed="0.07"
+      src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292932/img2_certmb.jpg?auto=format&fit=crop&w=1400&q=80"
+      data-fb="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292932/img2_certmb.jpg?auto=format&fit=crop&w=1400&q=80|https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292932/img2_certmb.jpg?auto=format&fit=crop&w=1400&q=80"
+      alt="Inside the café — counter and morning light">
+  </div>
+  <div class="split-panel">
+    <span class="caps" data-reveal>Breakfast · Brunch · Bakes</span>
+    <h2 class="split-text" data-split>Looking for our menu?</h2>
+    <p data-reveal style="--d:.24s">Shakshuka with thyme butter, ricotta hotcakes, marmalade French toast — and a bakery case that changes with the seasons.</p>
+  </div>
+</section>
+<!-- SECTION 3: ABOUT — café story + bakery facts merged -->
+<section class="meet" id="about">
+  <div class="meet-copy">
+    <span class="caps" data-reveal>Our café &amp; bakery</span>
+    <h2 class="split-text" data-split data-lines="3,2">Come &amp; meet us on the corner</h2>
+    <p data-reveal style="--d:.24s">We're a small café with a big oven — started by two friends who couldn't find a proper breakfast in the neighbourhood, so we built one. The ovens downstairs are on at 4am, so the croissants are warm by the time you're awake. Plants in the window, jazz on the speakers, jars of house marmalade on every table.</p>
+    <div class="mini-stats" data-stagger>
+      <div data-reveal><div class="num split-text" data-split>4 am</div><div class="label split-text" data-split>First bake</div></div>
+      <div data-reveal><div class="num split-text" data-split>48 h</div><div class="label split-text" data-split>Sourdough ferment</div></div>
+      <div data-reveal><div class="num split-text" data-split>12</div><div class="label split-text" data-split>Pastries daily</div></div>
+    </div>
+  </div>
+  <div class="meet-photos">
+    <div class="ph-a mask">
+      <img loading="lazy" class="plx" data-speed="0.05"
+        src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781431745/img3-3_cvdt8f.jpg?auto=format&fit=crop&w=1000&q=80"
+        data-fb="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781431745/img3-3_cvdt8f.jpg?auto=format&fit=crop&w=1000&q=80"
+        alt="Friends sharing coffee at the café">
+    </div>
+    <div class="ph-b mask" style="--d:.2s">
+      <img loading="lazy" class="plx" data-speed="0.12"
+        src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292931/img4_dcjn9g.jpg?auto=format&fit=crop&w=900&q=80"
+        data-fb="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292931/img4_dcjn9g.jpg?auto=format&fit=crop&w=900&q=80"
+        alt="Breakfast plate with avocado toast and eggs">
+    </div>
+  </div>
+</section>
+<!-- SECTION 4: MENU TRIO -->
+<section class="menu-trio" id="menu">
+  <div class="section-head">
+    <span class="caps" data-reveal>From 8am, every day</span>
+    <h2 class="split-text" data-split data-lines="2,2">The morning, done properly</h2>
+  </div>
+  <div class="cards" data-stagger>
+    <article class="card" data-reveal data-popup="popup-breakfast" onclick="openPopup('popup-breakfast')" role="button" tabindex="0">
+      <div class="card-photo">
+        <img loading="lazy"
+          src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/breakfast_nl517s.jpg?auto=format&fit=crop&w=900&q=80"
+          data-fb="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/breakfast_nl517s.jpg?auto=format&fit=crop&w=900&q=80"
+          alt="French toast with berries and syrup">
+      </div>
+      <div class="card-body">
+        <div class="card-default">
+          <span class="caps">Start with</span>
+          <h3 class="split-text" data-split>Breakfast</h3>
+        </div>
+        <div class="card-panel">
+          <span class="caps">Start with</span>
+          <h3>Breakfast</h3>
+          <p>All-day plates built around our own bread — French toast, soft eggs, whipped ricotta, and seasonal fruit from the market.</p>
+          <span class="link-line">Breakfast menu</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-reveal data-popup="popup-bakery" onclick="openPopup('popup-bakery')" role="button" tabindex="0">
+      <div class="card-photo">
+        <img loading="lazy"
+          src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/bakery_so5jyi.jpg?auto=format&fit=crop&w=900&q=80"
+          data-fb="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/bakery_so5jyi.jpg?auto=format&fit=crop&w=900&q=80"
+          alt="Butter croissants fresh from the oven">
+      </div>
+      <div class="card-body">
+        <div class="card-default">
+          <span class="caps">From the oven</span>
+          <h3 class="split-text" data-split>Bakery</h3>
+        </div>
+        <div class="card-panel">
+          <span class="caps">From the oven</span>
+          <h3>Bakery</h3>
+          <p>Sourdough, laminated pastries and one seasonal bake a week. Everything mixed, proofed and baked here — never frozen.</p>
+          <span class="link-line">Today's bakes</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-reveal data-popup="popup-coffee" onclick="openPopup('popup-coffee')" role="button" tabindex="0">
+      <div class="card-photo">
+        <img loading="lazy"
+          src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/coffee_my2ede.jpg?auto=format&fit=crop&w=900&q=80"
+          data-fb="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/coffee_my2ede.jpg?auto=format&fit=crop&w=900&q=80"
+          alt="Flat white with latte art">
+      </div>
+      <div class="card-body">
+        <div class="card-default">
+          <span class="caps">To go with it</span>
+          <h3 class="split-text" data-split>Coffee</h3>
+        </div>
+        <div class="card-panel">
+          <span class="caps">To go with it</span>
+          <h3>Coffee</h3>
+          <p>Single-origin espresso, slow-brew filter and a house orange-thyme cold brew. Roasted locally, dialled in daily.</p>
+          <span class="link-line">Coffee list</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+
+<!-- SECTION 5: INSTAGRAM -->
+<section class="insta">
+  <div class="section-head">
+    <span class="caps" data-reveal>@marmaladeandthyme</span>
+    <h2 class="split-text" data-split>Fresh on the feed</h2>
+  </div>
+  <div class="insta-grid" data-stagger>
+    <a href="#" class="mask" aria-label="View on Instagram: Croissant and coffee"><img loading="lazy" src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292932/i1_kmhgdz.jpg?auto=format&fit=crop&w=700&q=80" data-fb="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="Croissant and coffee"></a>
+    <a href="#" class="mask" aria-label="View on Instagram: Pancakes with honey"><img loading="lazy" src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292931/i2_a0nbtg.jpg?auto=format&fit=crop&w=700&q=80" data-fb="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=700&q=80" alt="Pancakes with honey"></a>
+    <a href="#" class="mask" aria-label="View on Instagram: Cake with fresh berries"><img loading="lazy" src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292934/i3_mlkszj.jpg?auto=format&fit=crop&w=700&q=80" data-fb="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=700&q=80" alt="Cake with fresh berries"></a>
+    <a href="#" class="mask" aria-label="View on Instagram: Barista pouring coffee"><img loading="lazy" src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292932/i4_v3tsa5.jpg?auto=format&fit=crop&w=700&q=80" data-fb="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="Barista pouring coffee"></a>
+    <a href="#" class="mask" aria-label="View on Instagram: Bakery counter"><img loading="lazy" src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292934/i5_yhclhk.jpg?auto=format&fit=crop&w=700&q=80" data-fb="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=700&q=80" alt="Bakery counter"></a>
+    <a href="#" class="mask" aria-label="View on Instagram: Café interior"><img loading="lazy" src="https://res.cloudinary.com/drgt7nf4u/image/upload/v1781292929/i6_gea3sy.jpg?auto=format&fit=crop&w=700&q=80" data-fb="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=80" alt="Café interior"></a>
+  </div>
+</section>
+
+<!-- FOOTER with visit info -->
+<footer id="visit">
+  <div class="visit" data-stagger>
+    <div data-reveal>
+      <h3>Opening hours</h3>
+      <ul>
+        <li><span>Mon — Fri</span><span>8:00 — 18:00</span></li>
+        <li><span>Saturday</span><span>9:00 — 19:00</span></li>
+        <li><span>Sunday</span><span>9:00 — 16:00</span></li>
+      </ul>
+    </div>
+    <div data-reveal>
+      <h3>Find us</h3>
+      <p>14 Orchard Lane, Old Town<br>On the corner, look for the green awning.<br><br><a href="#" onclick="openPopup('popup-map');return false;">Show on map</a></p>
+    </div>
+    <div data-reveal>
+      <h3>Say hello</h3>
+      <p>hello@marmaladeandthyme.com<br>+44 20 1234 5678<br><br><a href="#" onclick="openPopup('popup-book');return false;">Book a table</a> · <a href="#" onclick="openPopup('popup-order');return false;">Order ahead</a></p>
+    </div>
+  </div>
+  <div class="foot-mark" data-reveal>Marmalade<br><span>&amp;</span> Thyme</div>
+  <div class="foot-bottom">
+    <span>© 2026 Marmalade &amp; Thyme</span>
+    <div class="socials">
+      <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="#" target="_blank" rel="noopener noreferrer">Tripadvisor</a>
+    </div>
+    <span>Baked fresh, never frozen</span>
+  </div>
+</footer>
+
+<script>
+  // image fallback chain: if an Unsplash image fails, try the next one
+  document.querySelectorAll('img[data-fb]').forEach(img => {
+    img.addEventListener('error', () => {
+      const list = (img.dataset.fb || '').split('|').filter(Boolean);
+      if (list.length) {
+        img.dataset.fb = list.slice(1).join('|');
+        img.src = list[0];
+      } else {
+        img.style.visibility = 'hidden'; // show placeholder background instead
+      }
+    });
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // pause hero video for users who prefer reduced motion
+  const heroVideo = document.querySelector('.hero-bg video');
+  const heroPoster = document.querySelector('.hero-poster');
+  if (reduceMotion) {
+    if (heroVideo) { heroVideo.removeAttribute('autoplay'); heroVideo.pause(); }
+  } else if (heroVideo && heroPoster) {
+    let revealed = false;
+    const hidePoster = () => {
+      if (revealed) return;
+      revealed = true;
+      heroPoster.classList.add('hide');
+    };
+
+    // start playback from the very first frame as soon as possible
+    const tryPlay = () => {
+      heroVideo.currentTime = 0;
+      const p = heroVideo.play();
+      if (p && p.catch) p.catch(() => {});
+    };
+
+    // reveal the video only once a real frame is actually painted,
+    // so the swap from poster to video is invisible
+    if ('requestVideoFrameCallback' in heroVideo) {
+      heroVideo.requestVideoFrameCallback(hidePoster);
+    } else {
+      // fallback: wait until playback time actually advances
+      heroVideo.addEventListener('timeupdate', () => {
+        if (heroVideo.currentTime > 0.05) hidePoster();
+      });
+    }
+    heroVideo.addEventListener('playing', () => {
+      // safety net in case the frame callback never fires
+      setTimeout(hidePoster, 400);
+    }, { once: true });
+
+    if (heroVideo.readyState >= 2) tryPlay();
+    else heroVideo.addEventListener('loadeddata', tryPlay, { once: true });
+  }
+
+  // ---------- mobile staggered menu ----------
+  const mobBtn   = document.getElementById('mobMenuBtn');
+  const mobPanel = document.getElementById('mobPanel');
+  function openMobMenu() {
+    document.body.classList.add('mob-menu-open');
+    document.body.style.overflow = 'hidden';
+    mobBtn.setAttribute('aria-expanded','true');
+    mobPanel.setAttribute('aria-hidden','false');
+  }
+  function closeMobMenu() {
+    document.body.classList.remove('mob-menu-open');
+    document.body.style.overflow = '';
+    mobBtn.setAttribute('aria-expanded','false');
+    mobPanel.setAttribute('aria-hidden','true');
+  }
+  if (mobBtn) {
+    mobBtn.addEventListener('click', () => {
+      document.body.classList.contains('mob-menu-open') ? closeMobMenu() : openMobMenu();
+    });
+  }
+  // close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeMobMenu();
+  });
+  document.querySelectorAll('[data-split]').forEach(el => {
+    const isHeroH1 = el.classList.contains('hero-h1');
+    const linesAttr = el.dataset.lines; // e.g. "3,2" = 3 words line1, 2 words line2
+    const raw = el.textContent.trim();
+    const words = raw.split(/\s+/);
+
+    const makeWord = (w, idx) =>
+      `<span class="split-word"><span class="split-word-inner" style="--wd:${idx * 0.13}s">${w}</span></span>`;
+
+    if (isHeroH1) {
+      const l1 = words.slice(0, 2), l2 = words.slice(2);
+      el.innerHTML =
+        `<span class="split-line">${l1.map((w,i)=>makeWord(w,i)).join('')}</span><br>` +
+        `<span class="split-line">${l2.map((w,i)=>makeWord(w, l1.length+i)).join('')}</span>`;
+    } else if (linesAttr) {
+      const counts = linesAttr.split(',').map(Number);
+      let offset = 0, html = '';
+      counts.forEach((count, li) => {
+        const chunk = words.slice(offset, offset + count);
+        html += `<span class="split-line">${chunk.map((w,i)=>makeWord(w, offset+i)).join('')}</span>`;
+        if (li < counts.length - 1) html += '<br>';
+        offset += count;
+      });
+      // remaining words (if counts don't add up)
+      if (offset < words.length) {
+        html += `<span class="split-line">${words.slice(offset).map((w,i)=>makeWord(w,offset+i)).join('')}</span>`;
+      }
+      el.innerHTML = html;
+    } else {
+      el.innerHTML = words.map((w,i) => makeWord(w, i)).join('');
+    }
+  });
+
+  // ---------- split text init ----------
+
+  // staggered delays inside [data-stagger] groups
+  document.querySelectorAll('[data-stagger]').forEach(group => {
+    [...group.children].forEach((child, i) => {
+      child.style.setProperty('--d', (i * 0.12) + 's');
+    });
+  });
+
+  // scroll reveal (fade-up + mask reveals)
+  const targets = document.querySelectorAll('[data-reveal], .mask, .split-text');
+  if (reduceMotion) {
+    targets.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    targets.forEach(el => io.observe(el));
+
+    // parallax for large image blocks (different speeds = staggered movement)
+    const plx = [...document.querySelectorAll('.plx')];
+    let ticking = false;
+    const update = () => {
+      const vh = window.innerHeight;
+      plx.forEach(el => {
+        const wrap = el.parentElement;
+        const r = wrap.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > vh) return;
+        const progress = (r.top + r.height / 2 - vh / 2) / vh; // -0.5..0.5
+        const shift = progress * parseFloat(el.dataset.speed || 0.08) * 200;
+        el.style.transform = `translate3d(0, ${shift}px, 0) scale(1.18)`;
+        el.style.transition = 'none';
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    setTimeout(update, 600);
+  }
+
+  // ---------- magnetic buttons ----------
+  if (!reduceMotion) {
+    document.querySelectorAll('.btn-pill, .btn-ghost').forEach(btn => {
+      // exclude popup buttons
+      if (btn.closest('.popup')) return;
+      const strength = 0.35;
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width  / 2);
+        const y = e.clientY - (r.top  + r.height / 2);
+        btn.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+  }
+
+  // ---------- meet-photos converge on scroll ----------
+  const phA = document.querySelector('.meet-photos .ph-a');
+  const phB = document.querySelector('.meet-photos .ph-b');
+  const meetPhotos = document.querySelector('.meet-photos');
+  if (phA && phB && meetPhotos && !reduceMotion) {
+    const updatePhotos = () => {
+      const r = meetPhotos.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // progress 0→1 as section scrolls from bottom of viewport to center
+      const progress = Math.max(0, Math.min(1, 1 - (r.top / (vh * 0.8))));
+      // start spread: ph-a pushed left+up+rotated, ph-b pushed right+down+rotated
+      const spread = (1 - progress);
+      phA.style.transform = `translate(${-60 * spread}px, ${-40 * spread}px) rotate(${-6 * spread}deg)`;
+      phB.style.transform = `translate(${60 * spread}px, ${40 * spread}px) rotate(${5 * spread}deg)`;
+    };
+    window.addEventListener('scroll', updatePhotos, { passive: true });
+    updatePhotos();
+  }
+</script>
+<!-- POPUP: Breakfast -->
+<div class="popup-overlay" id="popup-breakfast" role="dialog" aria-modal="true" aria-label="Breakfast menu">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup('popup-breakfast')" aria-label="Close">&#x2715;</button>
+    <span class="popup-label">Served all day · From 8am</span>
+    <h2 class="popup-title">Break&shy;fast</h2>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Eggs &amp; Toast</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Marmalade French Toast<span class="popup-item-desc">Brioche, orange marmalade, whipped ricotta, berries</span></span></div><span class="popup-item-price">12</span></div>
+      <div class="popup-item"><span class="popup-item-num">02</span><div><span class="popup-item-name">Soft Scrambled Eggs<span class="popup-item-desc">Our sourdough, cultured butter, chives</span></span></div><span class="popup-item-price">10</span></div>
+      <div class="popup-item"><span class="popup-item-num">03</span><div><span class="popup-item-name">Shakshuka<span class="popup-item-desc">Thyme butter, feta, sourdough toast</span></span></div><span class="popup-item-price">13</span></div>
+      <div class="popup-item"><span class="popup-item-num">04</span><div><span class="popup-item-name">Marmalade &amp; Thyme Toast<span class="popup-item-desc">Toasted sourdough, house marmalade, soft-boiled egg</span></span></div><span class="popup-item-price">9</span></div>
+    </div>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Something Sweet</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Ricotta Hotcakes<span class="popup-item-desc">Honey butter, seasonal fruit, lemon curd</span></span></div><span class="popup-item-price">13</span></div>
+      <div class="popup-item"><span class="popup-item-num">02</span><div><span class="popup-item-name">Overnight Oats<span class="popup-item-desc">Oat milk, toasted seeds, fig jam</span></span></div><span class="popup-item-price">8</span></div>
+      <div class="popup-item"><span class="popup-item-num">03</span><div><span class="popup-item-name">Seasonal Fruit Bowl<span class="popup-item-desc">Market fruit, whipped coconut, thyme honey</span></span></div><span class="popup-item-price">9</span></div>
+    </div>
+
+    <p class="popup-note">All dishes served with a glass of water. Gluten-free bread available on request. Please let us know about any allergies.</p>
+  </div>
+</div>
+
+<!-- POPUP: Bakery -->
+<div class="popup-overlay" id="popup-bakery" role="dialog" aria-modal="true" aria-label="Today's bakes">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup('popup-bakery')" aria-label="Close">&#x2715;</button>
+    <span class="popup-label">From the oven · Baked daily</span>
+    <h2 class="popup-title">Bakery</h2>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Pastries</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Butter Croissant<span class="popup-item-desc">Classic laminated, 48-hour dough</span></span></div><span class="popup-item-price">4</span></div>
+      <div class="popup-item"><span class="popup-item-num">02</span><div><span class="popup-item-name">Almond Croissant<span class="popup-item-desc">Frangipane, toasted flaked almonds</span></span></div><span class="popup-item-price">5</span></div>
+      <div class="popup-item"><span class="popup-item-num">03</span><div><span class="popup-item-name">Pain au Chocolat<span class="popup-item-desc">Dark Valrhona chocolate</span></span></div><span class="popup-item-price">5</span></div>
+      <div class="popup-item"><span class="popup-item-num">04</span><div><span class="popup-item-name">Seasonal Danish<span class="popup-item-desc">Changes weekly — ask at the counter</span></span></div><span class="popup-item-price">6</span></div>
+    </div>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Bread</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Country Sourdough<span class="popup-item-desc">Whole loaf, 48-hour cold ferment</span></span></div><span class="popup-item-price">11</span></div>
+      <div class="popup-item"><span class="popup-item-num">02</span><div><span class="popup-item-name">Seeded Rye<span class="popup-item-desc">Sunflower, sesame, caraway</span></span></div><span class="popup-item-price">10</span></div>
+      <div class="popup-item"><span class="popup-item-num">03</span><div><span class="popup-item-name">Focaccia<span class="popup-item-desc">Rosemary &amp; sea salt, half or whole</span></span></div><span class="popup-item-price">7</span></div>
+    </div>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Seasonal Bake</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Almond &amp; Fig Cake<span class="popup-item-desc">One bake per week, slice or whole</span></span></div><span class="popup-item-price">6</span></div>
+    </div>
+
+    <p class="popup-note">Bread is available from 8am and sells out early. Order ahead by email to reserve a loaf. Everything baked on-site — never frozen.</p>
+  </div>
+</div>
+
+<!-- POPUP: Coffee -->
+<div class="popup-overlay" id="popup-coffee" role="dialog" aria-modal="true" aria-label="Coffee list">
+  <div class="popup">
+    <button class="popup-close" onclick="closePopup('popup-coffee')" aria-label="Close">&#x2715;</button>
+    <span class="popup-label">Roasted locally · Dialled in daily</span>
+    <h2 class="popup-title">Coffee</h2>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Espresso Bar</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Espresso<span class="popup-item-desc">Single origin, changed seasonally</span></span></div><span class="popup-item-price">3</span></div>
+      <div class="popup-item"><span class="popup-item-num">02</span><div><span class="popup-item-name">Flat White<span class="popup-item-desc">Double ristretto, microfoam</span></span></div><span class="popup-item-price">4</span></div>
+      <div class="popup-item"><span class="popup-item-num">03</span><div><span class="popup-item-name">Latte<span class="popup-item-desc">Oat, almond or whole milk</span></span></div><span class="popup-item-price">5</span></div>
+      <div class="popup-item"><span class="popup-item-num">04</span><div><span class="popup-item-name">Cappuccino<span class="popup-item-desc">Classic ratio, dry or wet</span></span></div><span class="popup-item-price">4</span></div>
+      <div class="popup-item"><span class="popup-item-num">05</span><div><span class="popup-item-name">Cortado<span class="popup-item-desc">Equal parts espresso &amp; steamed milk</span></span></div><span class="popup-item-price">4</span></div>
+    </div>
+
+    <div class="popup-category">
+      <div class="popup-category-head">
+        
+        <span class="popup-category-name">Cold &amp; Filter</span>
+      </div>
+      <div class="popup-item"><span class="popup-item-num">01</span><div><span class="popup-item-name">Filter Coffee<span class="popup-item-desc">Slow-brew batch, single origin</span></span></div><span class="popup-item-price">4</span></div>
+      <div class="popup-item"><span class="popup-item-num">02</span><div><span class="popup-item-name">Cold Brew<span class="popup-item-desc">12-hour steep, served over ice</span></span></div><span class="popup-item-price">5</span></div>
+      <div class="popup-item"><span class="popup-item-num">03</span><div><span class="popup-item-name">Orange &amp; Thyme Cold Brew<span class="popup-item-desc">House recipe, lightly sweetened</span></span></div><span class="popup-item-price">6</span></div>
+    </div>
+
+    <p class="popup-note">All espresso drinks available with oat, almond or whole milk at no extra charge. Decaf available on request.</p>
+  </div>
+</div>
+
+<script>
+  function openPopup(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    // close on overlay click
+    el.addEventListener('click', function handler(e) {
+      if (e.target === el) { closePopup(id); el.removeEventListener('click', handler); }
+    });
+    // close on Escape
+    document.addEventListener('keydown', function esc(e) {
+      if (e.key === 'Escape') { closePopup(id); document.removeEventListener('keydown', esc); }
+    });
+  }
+  function closePopup(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+
+<!-- POPUP: Map -->
+<div class="popup-overlay" id="popup-map" role="dialog" aria-modal="true" aria-label="Show on map">
+  <div class="popup" style="max-width:540px;padding:0;overflow:hidden;">
+    <button class="popup-close" onclick="closePopup('popup-map')" aria-label="Close">&#x2715;</button>
+
+    <!-- SVG Map illustration -->
+    <svg viewBox="0 0 540 360" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;">
+      <defs>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#20271A" flood-opacity=".18"/>
+        </filter>
+        <filter id="pinshadow" x="-40%" y="-40%" width="180%" height="180%">
+          <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#20271A" flood-opacity=".28"/>
+        </filter>
+      </defs>
+
+      <!-- Background -->
+      <rect width="540" height="360" fill="#E8E9D8"/>
+
+      <!-- City blocks — background streets -->
+      <rect x="0" y="0" width="540" height="360" fill="#E8E9D8"/>
+
+      <!-- Main roads -->
+      <rect x="0" y="155" width="540" height="22" fill="#F4F4EA" opacity=".9"/>
+      <rect x="248" y="0" width="22" height="360" fill="#F4F4EA" opacity=".9"/>
+      <rect x="0" y="290" width="540" height="16" fill="#F4F4EA" opacity=".75"/>
+      <rect x="130" y="0" width="16" height="360" fill="#F4F4EA" opacity=".75"/>
+      <rect x="390" y="0" width="16" height="360" fill="#F4F4EA" opacity=".75"/>
+      <rect x="0" y="60" width="540" height="14" fill="#F4F4EA" opacity=".65"/>
+
+      <!-- City blocks — filled rectangles -->
+      <!-- top-left quadrant -->
+      <rect x="18" y="14" width="94" height="58" rx="3" fill="#DDE0CB"/>
+      <rect x="18" y="82" width="58" height="62" rx="3" fill="#DDE0CB"/>
+      <rect x="84" y="82" width="34" height="28" rx="3" fill="#DDE0CB"/>
+      <rect x="84" y="118" width="34" height="26" rx="3" fill="#DDE0CB"/>
+      <rect x="18" y="152" width="0" height="0"/>
+
+      <!-- top-right quadrant -->
+      <rect x="280" y="14" width="88" height="58" rx="3" fill="#DDE0CB"/>
+      <rect x="376" y="14" width="148" height="36" rx="3" fill="#DDE0CB"/>
+      <rect x="376" y="58" width="148" height="88" rx="3" fill="#DDE0CB"/>
+      <rect x="280" y="82" width="88" height="64" rx="3" fill="#DDE0CB"/>
+
+      <!-- bottom-left quadrant -->
+      <rect x="18" y="188" width="94" height="86" rx="3" fill="#DDE0CB"/>
+      <rect x="18" y="282" width="94" height="62" rx="3" fill="#DDE0CB"/>
+      <rect x="155" y="188" width="76" height="48" rx="3" fill="#DDE0CB"/>
+      <rect x="155" y="244" width="76" height="38" rx="3" fill="#DDE0CB"/>
+      <rect x="155" y="290" width="76" height="56" rx="3" fill="#DDE0CB"/>
+
+      <!-- bottom-right quadrant -->
+      <rect x="280" y="188" width="88" height="86" rx="3" fill="#DDE0CB"/>
+      <rect x="280" y="282" width="88" height="62" rx="3" fill="#DDE0CB"/>
+      <rect x="414" y="188" width="110" height="52" rx="3" fill="#DDE0CB"/>
+      <rect x="414" y="248" width="110" height="40" rx="3" fill="#DDE0CB"/>
+      <rect x="414" y="296" width="110" height="48" rx="3" fill="#DDE0CB"/>
+
+      <!-- Park / green area -->
+      <rect x="155" y="14" width="76" height="130" rx="6" fill="#C8D4A8" opacity=".85"/>
+      <rect x="162" y="22" width="62" height="114" rx="4" fill="#B8C898" opacity=".7"/>
+      <!-- park trees -->
+      <circle cx="180" cy="50" r="9" fill="#8FA86A" opacity=".7"/>
+      <circle cx="200" cy="70" r="7" fill="#8FA86A" opacity=".6"/>
+      <circle cx="190" cy="90" r="8" fill="#8FA86A" opacity=".65"/>
+      <circle cx="210" cy="110" r="7" fill="#8FA86A" opacity=".6"/>
+      <circle cx="175" cy="115" r="6" fill="#8FA86A" opacity=".5"/>
+
+      <!-- Street labels -->
+      <text x="270" y="150" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="8" font-weight="600" fill="#8A9080" letter-spacing="1.5" text-transform="uppercase">ORCHARD LANE</text>
+      <text x="259" y="100" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="7" fill="#8A9080" letter-spacing="1" transform="rotate(-90,259,100)">HIGH ST</text>
+      <text x="400" y="150" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="7" fill="#8A9080" letter-spacing="1">MILL ROAD</text>
+      <text x="130" y="270" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="7" fill="#8A9080" letter-spacing="1" transform="rotate(-90,130,270)">GROVE ST</text>
+
+      <!-- Intersection highlight — our corner -->
+      <circle cx="259" cy="166" r="28" fill="#B8862B" opacity=".12"/>
+      <circle cx="259" cy="166" r="18" fill="#B8862B" opacity=".16"/>
+
+      <!-- Pin -->
+      <g filter="url(#pinshadow)" transform="translate(259,166)">
+        <path d="M0,-32 C-12,-32 -20,-24 -20,-14 C-20,2 0,22 0,22 C0,22 20,2 20,-14 C20,-24 12,-32 0,-32 Z" fill="#44552F"/>
+        <circle cx="0" cy="-14" r="8" fill="#F4F4EA"/>
+        <circle cx="0" cy="-14" r="4" fill="#B8862B"/>
+      </g>
+
+      <!-- Label bubble -->
+      <g transform="translate(259,120)">
+        <rect x="-68" y="-22" width="136" height="38" rx="4" fill="#20271A" filter="url(#shadow)"/>
+        <text x="0" y="-5" text-anchor="middle" font-family="Fraunces, serif" font-size="11" font-weight="600" fill="#F1EFE0">Marmalade &amp; Thyme</text>
+        <text x="0" y="10" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="8.5" fill="#B8862B" letter-spacing=".5">14 Orchard Lane, Old Town</text>
+        <!-- bubble tail -->
+        <polygon points="-6,16 6,16 0,23" fill="#20271A"/>
+      </g>
+
+      <!-- Compass rose -->
+      <g transform="translate(40,328)">
+        <circle cx="0" cy="0" r="14" fill="#F4F4EA" opacity=".9"/>
+        <text x="0" y="-3" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="9" font-weight="700" fill="#44552F">N</text>
+        <polygon points="0,-12 2,-5 -2,-5" fill="#44552F"/>
+        <polygon points="0,12 2,5 -2,5" fill="#8A9080" opacity=".5"/>
+      </g>
+    </svg>
+
+    <!-- Address footer -->
+    <div style="padding:20px 28px 24px;background:var(--paper);border-top:1px solid rgba(32,39,26,.1);">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-family:var(--display);font-size:16px;font-weight:560;color:var(--ink);margin-bottom:4px;">14 Orchard Lane, Old Town</div>
+          <div style="font-family:var(--body);font-size:12px;color:rgba(32,39,26,.6);letter-spacing:.08em;">On the corner — look for the green awning</div>
+        </div>
+        <div style="font-family:var(--body);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(32,39,26,.45);">Mon–Fri 8–18 · Sat–Sun 9–19</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP: Book a table -->
+<div class="popup-overlay" id="popup-book" role="dialog" aria-modal="true" aria-label="Book a table">
+  <div class="popup" style="max-width:500px;">
+    <button class="popup-close" onclick="closePopup('popup-book')" aria-label="Close">&#x2715;</button>
+    <span class="popup-label">Reservations · Same day welcome</span>
+    <h2 class="popup-title" style="font-size:clamp(36px,7vw,52px);margin-bottom:32px;">Book a<br>Table</h2>
+
+    <div class="form-fields" id="book-fields">
+      <div class="form-row">
+        <label for="book-name">Full name</label>
+        <input type="text" id="book-name" placeholder="Your name" autocomplete="name">
+        <span class="field-error">Please enter your name</span>
+      </div>
+      <div class="form-row">
+        <label for="book-phone">Phone number</label>
+        <input type="tel" id="book-phone" placeholder="+44 000 000 0000" autocomplete="tel">
+        <span class="field-error">Please enter a valid phone number</span>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="book-date">Date</label>
+          <input type="date" id="book-date">
+          <span class="field-error">Please select a date</span>
+        </div>
+        <div class="form-row">
+          <label for="book-time">Time</label>
+          <select id="book-time">
+            <option value="" disabled selected>Select time</option>
+            <option>08:00</option><option>08:30</option>
+            <option>09:00</option><option>09:30</option>
+            <option>10:00</option><option>10:30</option>
+            <option>11:00</option><option>11:30</option>
+            <option>12:00</option><option>12:30</option>
+            <option>13:00</option><option>13:30</option>
+            <option>14:00</option><option>14:30</option>
+            <option>15:00</option><option>15:30</option>
+            <option>16:00</option><option>16:30</option>
+            <option>17:00</option><option>17:30</option>
+          </select>
+          <span class="field-error">Please select a time</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <label for="book-guests">Number of guests</label>
+        <select id="book-guests">
+          <option value="" disabled selected>Select guests</option>
+          <option>1 guest</option><option>2 guests</option>
+          <option>3 guests</option><option>4 guests</option>
+          <option>5 guests</option><option>6 guests</option>
+          <option>7+ guests — call us</option>
+        </select>
+        <span class="field-error">Please select number of guests</span>
+      </div>
+      <button class="btn-submit" onclick="submitForm('book')">Confirm reservation</button>
+    </div>
+
+    <div class="form-confirm" id="book-confirm">
+      <div class="confirm-icon">
+        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 13l5 5L21 7" stroke="#F1EFE0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>See you soon!</h3>
+      <p>Your table is reserved. We'll send a confirmation to your phone shortly. The croissants will be warm.</p>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP: Order ahead -->
+<div class="popup-overlay" id="popup-order" role="dialog" aria-modal="true" aria-label="Order ahead">
+  <div class="popup" style="max-width:500px;">
+    <button class="popup-close" onclick="closePopup('popup-order')" aria-label="Close">&#x2715;</button>
+    <span class="popup-label">Order ahead · Ready for collection</span>
+    <h2 class="popup-title" style="font-size:clamp(36px,7vw,52px);margin-bottom:32px;">Order<br>Ahead</h2>
+
+    <div class="form-fields" id="order-fields">
+      <div class="form-row">
+        <label for="order-name">Full name</label>
+        <input type="text" id="order-name" placeholder="Your name" autocomplete="name">
+        <span class="field-error">Please enter your name</span>
+      </div>
+      <div class="form-row">
+        <label for="order-phone">Phone number</label>
+        <input type="tel" id="order-phone" placeholder="+44 000 000 0000" autocomplete="tel">
+        <span class="field-error">Please enter a valid phone number</span>
+      </div>
+      <div class="form-row">
+        <label for="order-email">Email</label>
+        <input type="email" id="order-email" placeholder="your@email.com" autocomplete="email">
+        <span class="field-error">Please enter a valid email address</span>
+      </div>
+      <div class="form-row">
+        <label for="order-message">Your order</label>
+        <textarea id="order-message" placeholder="Tell us what you'd like — bread, pastries, a specific bake. We'll confirm availability and collection time."></textarea>
+        <span class="field-error">Please tell us what you'd like to order</span>
+      </div>
+      <button class="btn-submit" onclick="submitForm('order')">Send order</button>
+    </div>
+
+    <div class="form-confirm" id="order-confirm">
+      <div class="confirm-icon">
+        <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5 13l5 5L21 7" stroke="#F1EFE0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3>Order received!</h3>
+      <p>We'll be in touch shortly to confirm your order and collection time. See you at the counter.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ---- validation helpers ----
+  function isValidPhone(v){ return /^[+\d\s\-()]{7,}$/.test(v.trim()); }
+  function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+  function isValidDate(v){
+    if (!v) return false;
+    const d = new Date(v);
+    const today = new Date(); today.setHours(0,0,0,0);
+    return d >= today;
+  }
+
+  function validateField(el, condition) {
+    const row = el.closest('.form-row');
+    if (!condition) { row.classList.add('has-error'); return false; }
+    row.classList.remove('has-error'); return true;
+  }
+
+  // clear error on input/change
+  document.querySelectorAll('.form-row input, .form-row select, .form-row textarea').forEach(el => {
+    el.addEventListener('input', () => el.closest('.form-row').classList.remove('has-error'));
+    el.addEventListener('change', () => el.closest('.form-row').classList.remove('has-error'));
+  });
+
+  function submitForm(type) {
+    let valid = true;
+
+    if (type === 'book') {
+      const name  = document.getElementById('book-name');
+      const phone = document.getElementById('book-phone');
+      const date  = document.getElementById('book-date');
+      const time  = document.getElementById('book-time');
+      const guests= document.getElementById('book-guests');
+
+      if (!validateField(name,  name.value.trim().length >= 2))   valid = false;
+      if (!validateField(phone, isValidPhone(phone.value)))        valid = false;
+      if (!validateField(date,  isValidDate(date.value)))          valid = false;
+      if (!validateField(time,  time.value !== ''))                valid = false;
+      if (!validateField(guests,guests.value !== ''))              valid = false;
+    }
+
+    if (type === 'order') {
+      const name  = document.getElementById('order-name');
+      const phone = document.getElementById('order-phone');
+      const email = document.getElementById('order-email');
+      const msg   = document.getElementById('order-message');
+
+      if (!validateField(name,  name.value.trim().length >= 2))   valid = false;
+      if (!validateField(phone, isValidPhone(phone.value)))        valid = false;
+      if (!validateField(email, isValidEmail(email.value)))        valid = false;
+      if (!validateField(msg,   msg.value.trim().length >= 5))     valid = false;
+    }
+
+    if (!valid) return; // stop here, errors are shown inline
+
+    // all good — show confirmation
+    const fields  = document.getElementById(type + '-fields');
+    const confirm = document.getElementById(type + '-confirm');
+    fields.classList.add('hide');
+    confirm.classList.add('show');
+    const popup = confirm.closest('.popup');
+    if (popup) popup.scrollTop = 0;
+  }
+</script>
+
+</body>
+</html>
